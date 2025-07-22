@@ -9,16 +9,13 @@ contract Storage {
        uint256 amount;
     }
 
-    Person public person;
+    // use indexes to access the public person 
+    Person[] public people;
     
     function store(string memory _name, uint256 _amount) public payable {
         // if require condition is unmet the transaction is automatically reverted
         require(msg.value >= 5 wei);
-        person.name=_name;
-        person.amount=_amount;
+        people.push(Person(_name, _amount));
     }
 
-    function retrieve() public view returns (Person memory) {
-        return person;
-    }
 }
