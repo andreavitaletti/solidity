@@ -16,8 +16,12 @@ contract Storage {
      * @dev Store value in variable
      * @param num value to store
      */
-    function store(uint256 num) public {
-        number = num;
+    function store(uint256 num) public payable {
+        if(msg.value >= 5 wei) {
+            number = num;
+        } else {
+            payable(msg.sender).transfer(msg.value);
+        } 
     }
 
     /**
