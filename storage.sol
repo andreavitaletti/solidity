@@ -9,7 +9,6 @@ pragma solidity >=0.8.2 <0.9.0;
  */
 
 contract Storage {
-
     uint256 number;
 
     /**
@@ -17,18 +16,17 @@ contract Storage {
      * @param num value to store
      */
     function store(uint256 num) public payable {
-        if(msg.value >= 5 wei) {
-            number = num;
-        } else {
-            payable(msg.sender).transfer(msg.value);
-        } 
+        // if require condition is unmet the transaction is automatically reverted
+        // an error message is generated
+        require(msg.value >= 5 wei);
+        number = num;
     }
 
     /**
      * @dev Return value
      * @return value of 'number'
      */
-    function retrieve() public view returns (uint256){
+    function retrieve() public view returns (uint256) {
         return number;
     }
 }
